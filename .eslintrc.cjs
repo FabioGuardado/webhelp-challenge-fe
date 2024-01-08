@@ -16,7 +16,7 @@ module.exports = {
       { allowConstantExport: true },
     ],
     "prettier/prettier": ["error", { "endOfLine": "auto" }],
-    "no-console": "error",
+    "no-console": "warn",
     "quotes": [
       "error",
       "single",
