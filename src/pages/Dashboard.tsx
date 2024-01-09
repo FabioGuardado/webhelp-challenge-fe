@@ -10,6 +10,7 @@ import DashboardDataGridPagination from '../components/Dashboard/DataGrid/Dashbo
 
 import CreateEditModal from '../components/Dashboard/CreateEditModal/CreateEditModal';
 import useCreateEditModalContext from '../hooks/useCreateEditModalContext';
+import SearchBar from '../components/Dashboard/SearchBar/SearchBar';
 
 export const Dashboard = () => {
   const [searchParams] = useSearchParams();
@@ -20,7 +21,11 @@ export const Dashboard = () => {
 
   const [page] = useState<number>(Number(searchParams.get('page')) || 1);
 
-  const { employeesData } = useGetEmployees(page, pageSize);
+  const [searchString] = useState<string | undefined>(
+    searchParams.get('searchString') || undefined,
+  );
+
+  const { employeesData } = useGetEmployees(page, pageSize, searchString);
   const { openModal } = useCreateEditModalContext();
 
   const handlePageChange = (
@@ -63,6 +68,7 @@ export const Dashboard = () => {
           </Button>
         </Stack>
         <Card sx={{ marginTop: '3rem', bgcolor: '#f9f9f9' }}>
+          <SearchBar />
           <DashboardDataGrid employeesData={employeesData?.items || []} />
           <DashboardDataGridPagination
             count={employeesData?.totalCount || 0}

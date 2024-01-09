@@ -4,7 +4,11 @@ import { getEmployees } from '../api/employees';
 import PaginatedResponse from '../types/PaginatedResponse';
 import EmployeeDto from '../types/EmployeesDto';
 
-const useGetEmployees = (page: number, pageSize: number) => {
+const useGetEmployees = (
+  page: number,
+  pageSize: number,
+  searchString?: string | undefined,
+) => {
   const [employeesData, setEmployeesData] = useState<
     PaginatedResponse<EmployeeDto> | undefined
   >(undefined);
@@ -13,7 +17,7 @@ const useGetEmployees = (page: number, pageSize: number) => {
   const getData = useCallback(async () => {
     try {
       setIsLoading(true);
-      const data = await getEmployees(page, pageSize);
+      const data = await getEmployees(page, pageSize, searchString);
       setEmployeesData(data);
     } catch (error) {
       console.error(error);
