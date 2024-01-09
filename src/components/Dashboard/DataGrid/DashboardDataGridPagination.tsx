@@ -13,13 +13,12 @@ type Props = {
   disableNextButton: boolean;
   disablePrevButton: boolean;
 };
-
-export default function PartidasDataGridPagination({
+const PartidasDataGridPagination = ({
   sx,
   disableNextButton,
   disablePrevButton,
   ...other
-}: Props & TablePaginationProps) {
+}: Props & TablePaginationProps) => {
   return (
     <Box sx={{ position: 'relative', ...sx }}>
       <TablePagination
@@ -34,4 +33,6 @@ export default function PartidasDataGridPagination({
       />
     </Box>
   );
-}
+};
+
+export default PartidasDataGridPagination;

@@ -1,9 +1,12 @@
 import { GridColDef } from '@mui/x-data-grid';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Button } from '@mui/material';
+import DataGridActionsButton from '../components/Dashboard/DataGrid/DataGridActionsButton';
 
-export const DASHBOARD_DATA_GRID_COLUMNS: GridColDef[] = [
-  { field: 'firstName', headerName: 'First Name', width: 200 },
+export const getDataGridColumns = (): GridColDef[] => [
+  {
+    field: 'firstName',
+    headerName: 'First Name',
+    width: 200,
+  },
   { field: 'lastNames', headerName: 'Last Names', width: 200 },
   {
     field: 'documentType',
@@ -35,11 +38,7 @@ export const DASHBOARD_DATA_GRID_COLUMNS: GridColDef[] = [
     field: 'actions',
     headerName: 'Actions',
     width: 90,
-    renderCell: () => (
-      <Button>
-        <MoreVertIcon />
-      </Button>
-    ),
+    renderCell: params => <DataGridActionsButton employee={params.row} />,
   },
 ];
 

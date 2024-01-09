@@ -8,6 +8,9 @@ import useGetEmployees from '../hooks/useGetEmployees';
 import DashboardDataGrid from '../components/Dashboard/DataGrid/DashboardDataGrid';
 import DashboardDataGridPagination from '../components/Dashboard/DataGrid/DashboardDataGridPagination';
 
+import CreateEditModal from '../components/Dashboard/CreateEditModal/CreateEditModal';
+import useCreateEditModalContext from '../hooks/useCreateEditModalContext';
+
 export const Dashboard = () => {
   const [searchParams] = useSearchParams();
 
@@ -16,6 +19,7 @@ export const Dashboard = () => {
   const [page] = useState<number>(Number(searchParams.get('page')) || 1);
 
   const { employeesData } = useGetEmployees(page, pageSize);
+  const { openModal } = useCreateEditModalContext();
 
   const handlePageChange = (
     e: React.MouseEvent<HTMLButtonElement> | null,
@@ -34,29 +38,35 @@ export const Dashboard = () => {
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
   ) => setPageSize(Number(e.target.value));
 
+  const handleNewEmployeeClick = () => openModal('create');
+
   return (
-    <Container sx={{ marginTop: '5rem' }}>
-      <Stack flexDirection="row" justifyContent="space-between">
-        <Typography variant="h5" sx={{ fontWeight: '500' }}>
-          List of employees
-        </Typography>
-        <Button variant="contained">
-          <AddIcon sx={{ marginRight: '0.5rem' }} />
-          Add Employee
-        </Button>
-      </Stack>
-      <Card sx={{ marginTop: '3rem', bgcolor: '#f9f9f9' }}>
-        <DashboardDataGrid employeesData={employeesData?.items || []} />
-        <DashboardDataGridPagination
-          count={employeesData?.totalCount || 0}
-          page={page - 1}
-          rowsPerPage={pageSize}
-          disableNextButton={!employeesData?.hasNextPage}
-          disablePrevButton={!employeesData?.hasPreviousPage}
-          onPageChange={handlePageChange}
-          onRowsPerPageChange={handleRowsPerPageChange}
-        />
-      </Card>
-    </Container>
+    <>
+      <Container sx={{ marginTop: '5rem' }}>
+        <Stack flexDirection="row" justifyContent="space-between">
+          <Typography variant="h5" sx={{ fontWeight: '500' }}>
+            List of employees
+          </Typography>
+          <Button variant="contained" onClick={handleNewEmployeeClick}>
+            <AddIcon sx={{ marginRight: '0.5rem' }} />
+            Add Employee
+          </Button>
+        </Stack>
+        <Card sx={{ marginTop: '3rem', bgcolor: '#f9f9f9' }}>
+          <DashboardDataGrid employeesData={employeesData?.items || []} />
+          <DashboardDataGridPagination
+            count={employeesData?.totalCount || 0}
+            page={page - 1}
+            rowsPerPage={pageSize}
+            disableNextButton={!employeesData?.hasNextPage}
+            disablePrevButton={!employeesData?.hasPreviousPage}
+            onPageChange={handlePageChange}
+            onRowsPerPageChange={handleRowsPerPageChange}
+          />
+        </Card>
+      </Container>
+
+      <CreateEditModal />
+    </>
   );
 };

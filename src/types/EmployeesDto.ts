@@ -9,7 +9,7 @@ type EmployeeDto = {
   lastNames: string;
   documentType: DocumentTypeDto;
   documentNumber: string;
-  hiringDate: Date;
+  hiringDate: string;
   country: CountryDto;
   area: AreaDto;
   subArea: SubAreaDto;
