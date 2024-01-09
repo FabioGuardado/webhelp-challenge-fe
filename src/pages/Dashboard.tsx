@@ -14,7 +14,9 @@ import useCreateEditModalContext from '../hooks/useCreateEditModalContext';
 export const Dashboard = () => {
   const [searchParams] = useSearchParams();
 
-  const [pageSize, setPageSize] = useState<number>(5);
+  const [pageSize] = useState<number>(
+    Number(searchParams.get('pageSize')) || 5,
+  );
 
   const [page] = useState<number>(Number(searchParams.get('page')) || 1);
 
@@ -29,14 +31,22 @@ export const Dashboard = () => {
 
     const currentSearchParams = new URLSearchParams(searchParams);
     currentSearchParams.delete('page');
-    window.location = `/dashboard?page=${
-      newPage + 1
-    }${currentSearchParams.toString()}` as Location | (string & Location);
+    currentSearchParams.append('page', `${newPage + 1}`);
+    window.location = `/dashboard?${currentSearchParams.toString()}` as
+      | Location
+      | (string & Location);
   };
 
   const handleRowsPerPageChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
-  ) => setPageSize(Number(e.target.value));
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+  ) => {
+    const currentSearchParams = new URLSearchParams(searchParams);
+    currentSearchParams.delete('pageSize');
+    currentSearchParams.append('pageSize', event.target.value);
+    window.location = `/dashboard?${currentSearchParams.toString()}` as
+      | Location
+      | (string & Location);
+  };
 
   const handleNewEmployeeClick = () => openModal('create');
 
