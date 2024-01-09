@@ -32,7 +32,7 @@ const DataGridActionsMenu = ({
   };
 
   const handleDeleteClick = () => {
-    setIsDeleteModalOpen(true);
+    setIsDeleteModalOpen(!isDeleteModalOpen);
   };
 
   return (
@@ -51,12 +51,12 @@ const DataGridActionsMenu = ({
       {...props}
     >
       <MenuItem onClick={handleEditClick} disableRipple>
-        <EditIcon />
+        <EditIcon sx={{ marginRight: '0.5rem' }} />
         Edit
       </MenuItem>
 
       <MenuItem onClick={handleDeleteClick} disableRipple>
-        <DeleteIcon />
+        <DeleteIcon sx={{ marginRight: '0.5rem' }} />
         Delete
       </MenuItem>
 

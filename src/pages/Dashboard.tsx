@@ -11,6 +11,7 @@ import DashboardDataGridPagination from '../components/Dashboard/DataGrid/Dashbo
 import CreateEditModal from '../components/Dashboard/CreateEditModal/CreateEditModal';
 import useCreateEditModalContext from '../hooks/useCreateEditModalContext';
 import SearchBar from '../components/Dashboard/SearchBar/SearchBar';
+import Layout from '../components/UI/Layout/Layout';
 
 export const Dashboard = () => {
   const [searchParams] = useSearchParams();
@@ -56,33 +57,49 @@ export const Dashboard = () => {
   const handleNewEmployeeClick = () => openModal('create');
 
   return (
-    <>
-      <Container sx={{ marginTop: '5rem' }}>
-        <Stack flexDirection="row" justifyContent="space-between">
-          <Typography variant="h5" sx={{ fontWeight: '500' }}>
-            List of employees
-          </Typography>
-          <Button variant="contained" onClick={handleNewEmployeeClick}>
-            <AddIcon sx={{ marginRight: '0.5rem' }} />
-            Add Employee
-          </Button>
-        </Stack>
-        <Card sx={{ marginTop: '3rem', bgcolor: '#f9f9f9' }}>
-          <SearchBar />
-          <DashboardDataGrid employeesData={employeesData?.items || []} />
-          <DashboardDataGridPagination
-            count={employeesData?.totalCount || 0}
-            page={page - 1}
-            rowsPerPage={pageSize}
-            disableNextButton={!employeesData?.hasNextPage}
-            disablePrevButton={!employeesData?.hasPreviousPage}
-            onPageChange={handlePageChange}
-            onRowsPerPageChange={handleRowsPerPageChange}
-          />
-        </Card>
-      </Container>
+    <Layout>
+      <>
+        <Container sx={{ marginTop: '120px' }}>
+          <Stack flexDirection="row" justifyContent="space-between">
+            <Typography variant="h4" sx={{ fontWeight: '600' }}>
+              List of employees
+            </Typography>
+            <Button
+              variant="contained"
+              onClick={handleNewEmployeeClick}
+              sx={{
+                boxShadow: 'none',
+                borderRadius: '25px',
+                fontWeight: '600',
+              }}
+            >
+              <AddIcon sx={{ marginRight: '0.5rem' }} />
+              Add Employee
+            </Button>
+          </Stack>
+          <Card
+            sx={{
+              marginTop: '2rem',
+              bgcolor: '#f9f9f9',
+              padding: '1rem 2rem',
+            }}
+          >
+            <SearchBar />
+            <DashboardDataGrid employeesData={employeesData?.items || []} />
+            <DashboardDataGridPagination
+              count={employeesData?.totalCount || 0}
+              page={page - 1}
+              rowsPerPage={pageSize}
+              disableNextButton={!employeesData?.hasNextPage}
+              disablePrevButton={!employeesData?.hasPreviousPage}
+              onPageChange={handlePageChange}
+              onRowsPerPageChange={handleRowsPerPageChange}
+            />
+          </Card>
+        </Container>
 
-      <CreateEditModal />
-    </>
+        <CreateEditModal />
+      </>
+    </Layout>
   );
 };

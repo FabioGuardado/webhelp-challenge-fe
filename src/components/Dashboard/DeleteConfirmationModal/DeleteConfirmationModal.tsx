@@ -46,14 +46,14 @@ const DeleteConfirmationModal = ({
         >
           <Button
             variant="outlined"
-            sx={{ width: '150px' }}
+            sx={{ width: '150px', borderRadius: '25px', fontWeight: '600' }}
             onClick={handleClose}
           >
             Cancel
           </Button>
           <Button
             variant="contained"
-            sx={{ width: '150px' }}
+            sx={{ width: '150px', borderRadius: '25px', fontWeight: '600' }}
             onClick={handleClick}
           >
             Confirm

@@ -88,7 +88,7 @@ const CreateEditModal = () => {
       <DialogTitle>
         <span style={{ textTransform: 'capitalize' }}>{action}</span> Employee
       </DialogTitle>
-      <DialogContent sx={{ margin: '1rem' }}>
+      <DialogContent>
         <form onSubmit={handleSubmit}>
           <Stack direction="column" gap="1rem">
             <TextField
@@ -196,7 +196,12 @@ const CreateEditModal = () => {
             <Button
               variant="contained"
               type="submit"
-              sx={{ width: '200px', alignSelf: 'end' }}
+              sx={{
+                width: '200px',
+                alignSelf: 'end',
+                borderRadius: '25px',
+                fontWeight: '600',
+              }}
             >
               {action === 'create' ? 'Create' : 'Edit'}
             </Button>

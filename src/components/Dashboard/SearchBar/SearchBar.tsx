@@ -47,10 +47,13 @@ const SearchBar = () => {
           variant="text"
           onClick={handleClearFilter}
           sx={{
-            marginLeft: '1rem',
+            marginRight: '10px',
             position: 'absolute',
             right: 0,
             top: '10px',
+            width: '32px',
+            height: '32px',
+            borderRadius: '50px',
           }}
         >
           <ClearIcon />
@@ -60,7 +63,7 @@ const SearchBar = () => {
       <Button
         variant="text"
         onClick={handleSearchClick}
-        sx={{ marginLeft: '1rem' }}
+        sx={{ marginLeft: '1rem', borderRadius: '50px' }}
       >
         <SearchIcon />
       </Button>
